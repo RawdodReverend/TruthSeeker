@@ -7,18 +7,21 @@ from dataclasses import dataclass, field
 from datetime import datetime
 import re
 
-# --- CONFIG ---
-LM_STUDIO_API = "http://192.168.1.171:1234/v1"
-EMBED_MODEL = "text-embedding-nomic-embed-text-v1.5"
-CHAT_MODEL = "lmstudio-community/gemma-3-27b-it"
-PERSIST_PATH = "./chroma_db"
+# --- CONFIG (env override) ---
+LM_STUDIO_API = os.getenv("LM_STUDIO_API", "http://localhost:1234/v1")
+EMBED_MODEL = os.getenv("EMBED_MODEL", "text-embedding-nomic-embed-text-v1.5")
+CHAT_MODEL = os.getenv("CHAT_MODEL", "lmstudio-community/gemma-3-27b-it")
+PERSIST_PATH = os.getenv("PERSIST_PATH", "./chroma_db")
+
 MODEL_LIMITS = {
     "text-embedding-all-minilm-l6-v2-embedding": 512,
     "text-embedding-nomic-embed-text-v1.5": 8192,
 }
+
 MAX_TOKENS = MODEL_LIMITS.get(EMBED_MODEL, 8192)
-CHUNK_TOKENS = 400  # Larger chunks for big datasets
-OVERLAP_TOKENS = 80
+CHUNK_TOKENS = int(os.getenv("CHUNK_TOKENS", 400))     
+OVERLAP_TOKENS = int(os.getenv("OVERLAP_TOKENS", 80))
+
 
 @dataclass
 class SearchResult:
