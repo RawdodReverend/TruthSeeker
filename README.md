@@ -31,7 +31,7 @@ Install all dependencies with:
 
 ### 1. Clone the repo
 
-    git clone https://github.com/your/repo](https://github.com/RawdodReverend/TruthSeeker.git
+    git clone https://github.com/RawdodReverend/TruthSeeker.git
     cd repo
 
 ### 2. Install dependencies
