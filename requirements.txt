@@ -1,0 +1,13 @@
+requests
+beautifulsoup4
+tqdm
+pandas
+python-docx
+PyPDF2
+pypff
+chardet
+striprtf
+openai
+chromadb
+textract
+lxml
