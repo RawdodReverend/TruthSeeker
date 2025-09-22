@@ -20,10 +20,40 @@ Install all dependencies with:
 
 ### External Tools
 
-- ocrmypdf (for OCR on scanned PDFs, optional if you use --skip-ocr)
-- libpff (required by pypff to read PST files)
-- Torrent client (e.g., qBittorrent, Transmission, aria2) for WikiLeaks archives
-- LMStudio
+- **ocrmypdf** (for OCR on scanned PDFs, optional if you use --skip-ocr)
+- **libpff / pypff** (required to parse PST files)
+  - Linux / macOS:
+    ```bash
+    sudo apt-get update
+    sudo apt-get install -y build-essential python3-dev git autoconf automake libtool
+    git clone https://github.com/libyal/libpff.git
+    cd libpff
+    ./synclibs.sh
+    ./autogen.sh
+    ./configure
+    make
+    sudo make install
+    sudo ldconfig   # Linux only
+    cd pypff
+    python3 setup.py build
+    sudo python3 setup.py install
+    ```
+  - Windows:
+    - Install [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+    - Install Python dev headers (matching your Python version)
+    - Clone and build `libpff` with MSVC or MSYS2
+    - Build the Python bindings:
+      ```bash
+      python setup.py build
+      python setup.py install
+      ```
+    - Verify with:
+      ```python
+      import pypff
+      print(pypff.get_version())
+      ```
+- **Torrent client** (e.g., qBittorrent, Transmission, aria2) for WikiLeaks archives
+- **LMStudio**
 
 ---
 
